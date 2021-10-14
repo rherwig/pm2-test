@@ -6,8 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  deployment:
     runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: test.hrwg.de
+
     steps:
       - uses: actions/checkout@v2
 
