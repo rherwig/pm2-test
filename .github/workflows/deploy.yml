@@ -1,0 +1,32 @@
+name: NodeJS CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo SSH_HOST=164.90.172.241 >> .env
+          echo SSH_USER=root >> .env
+          echo SSH_KEY=~/.ssh/id_ed25519 >> .env
+          echo GIT_REPOSITORY=git@github.com:rherwig/pm2-test.git >> .env
+          echo GIT_BRANCH=origin/main >> .env
+          echo WEB_ROOT=/var/www/test >> .env
+
+      - name: Install PM2
+        run: npm i pm2
+
+      - name: Deploy
+        run: env $(cat .env | grep -v \"#\" | xargs) npm run deploy -- --force
