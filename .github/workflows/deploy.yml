@@ -15,6 +15,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Scan known hosts
+        run: ssh-keyscan -H 164.90.172.241 >> ~/.ssh/known_hosts
+
       - name: Create env file
         run: |
           touch .env
