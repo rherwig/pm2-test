@@ -23,7 +23,6 @@ jobs:
           touch .env
           echo SSH_HOST=164.90.172.241 >> .env
           echo SSH_USER=root >> .env
-          echo SSH_KEY=~/.ssh/id_ed25519 >> .env
           echo GIT_REPOSITORY=git@github.com:rherwig/pm2-test.git >> .env
           echo GIT_BRANCH=origin/main >> .env
           echo WEB_ROOT=/var/www/test >> .env

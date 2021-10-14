@@ -39,7 +39,6 @@ module.exports = {
         production: {
             user: SSH_USER,
             host: SSH_HOST,
-            key: SSH_KEY,
             ref: GIT_BRANCH,
             repo: GIT_REPOSITORY,
             path: WEB_ROOT,
